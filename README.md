@@ -2,27 +2,27 @@
 
 This project provides a statistical toolset designed to rigorously evaluate the structural and predictive agreement between numerical simulations and empirical measurements.
 
-Agreement analysis is essential to certify the validity of predictive models and data assimilation systems. The implemented methodology combines parametric and non-parametric approaches, ensuring that discrepancies are exhaustively quantified regardless of the topological distribution of the data. The result is a standardized analytical report that allows researchers and analysts to determine the objective similarity between observation and prediction.
+Agreement analysis is essential to certify the validity of predictive models and data assimilation systems. The implemented methodology combines parametric and non-parametric approaches, ensuring that discrepancies are exhaustively quantified regardless of the topological distribution of the data. The updated version allows for dynamic parameterization of the statistical tests, providing granular control over confidence levels, hypotheses, and equivalence bounds.
 
 ## Features and Statistical Analysis
 
-1. **Mann-Whitney U Test:** The primary advantage of this test is being non-parametric, which frees the researcher from assuming a normal distribution in the measurements. Its main disadvantage is evident in a decrease in statistical power compared to parametric tests when population normality is present. The metric is interpreted directly through its p-value. A result that fails to achieve statistical significance indicates that no structural difference is observed between the central tendencies of the observed and simulated time series.
+1. **Mann-Whitney U Test:** The primary advantage of this test is being non-parametric, which frees the researcher from assuming a normal distribution in the measurements. Its main disadvantage is evident in a decrease in statistical power compared to parametric tests when population normality is present. The metric is interpreted directly through its p-value. A result that fails to achieve statistical significance indicates that no structural difference is observed between the central tendencies of the observed and simulated time series. **Parameterizable:** `mw_alternative` (e.g., 'two-sided', 'less', 'greater').
 
 2. **Median Relative Difference:** The use of this metric offers the advantage of providing a quantification of the central percentage error that is highly resistant to extreme outliers. Its limitation lies in the possibility of masking large errors if the occurrence of severe discrepancies falls exclusively in the asymmetric tails of the distribution. The interpretation is carried out by observing the convergence toward the origin. A coefficient converging to zero certifies an optimal positional correspondence between the empirical system and the computational model.
 
-3. **Bootstrap Confidence Interval:** Intensive resampling provides the undeniable advantage of estimating the parametric stability of the mean difference without imposing theoretical restrictions on the underlying sample shape. The inherent disadvantages of this approach are the high algorithmic processing demand and potential structural instability when applied to extremely small data vectors. Its interpretation requires verifying the containment of the null parameter. If the confidence interval encompasses absolute zero, the detected difference has no discernible statistical relevance.
+3. **Bootstrap Confidence Interval:** Intensive resampling provides the undeniable advantage of estimating the parametric stability of the mean difference without imposing theoretical restrictions on the underlying sample shape. The inherent disadvantages of this approach are the high algorithmic processing demand and potential structural instability when applied to extremely small data vectors. Its interpretation requires verifying the containment of the null parameter. If the confidence interval encompasses absolute zero, the detected difference has no discernible statistical relevance. **Parameterizable:** `n_boot` (number of iterations) and `boot_alpha` (significance level).
 
 4. **Normalized Root Mean Square Error (NRMSE):** The calculation of this variable grants the advantage of facilitating cross-model analytical comparisons by standardizing the absolute error magnitudes, dividing them by the total range of the observations. Its operational vulnerability is the susceptibility to extreme anomalous measurements, which can artificially expand the range and distort the resulting index. It is interpreted as the percentage of modeling error within the context of the total variability spectrum. Marginal values affirm excellent general predictive precision.
 
 5. **Scatter Index:** The formulation of this coefficient advantageously contextualizes the absolute error magnitude relative to the equilibrium point or natural mean of the recorded phenomenon. The analytical restriction arises when measurements oscillate or converge around zero, generating asymmetries or undefined divisions. The statistic is interpreted equivalently to a coefficient of variation applied to the bias. Minimal proportions demonstrate that the unmodeled component is negligible compared to the typical behavior of the evaluated ecosystem.
 
-6. **Spearman Rank Correlation:** This ordinal evaluation guarantees the advantage of revealing complex monotonic synchronies while maintaining robustness against extreme perturbations in the data record. Its structural deficiency is the total omission of the quantitative scale of differences, focusing exclusively on relative positional rank. Its interpretation deciphers strict directional covariation. Significant values close to positive one indicate a proportional homologous reaction to environmental variance.
+6. **Spearman Rank Correlation:** This ordinal evaluation guarantees the advantage of revealing complex monotonic synchronies while maintaining robustness against extreme perturbations in the data record. Its structural deficiency is the total omission of the quantitative scale of differences, focusing exclusively on relative positional rank. Its interpretation deciphers strict directional covariation. Significant values close to positive one indicate a proportional homologous reaction to environmental variance. **Parameterizable:** `corr_alternative` ('two-sided', 'less', 'greater').
 
-7. **Kendall Tau Correlation:** Estimation through this coefficient has the advantage of offering an unbiased and highly efficient ordinal agreement measurement against high densities of repeated values or numerical ties. Its disadvantage manifests in higher computational iteration requirements and the usual generation of nominally lower magnitudes than those of Spearman. The interpretation is performed by observing the dominance of cross-sectional agreement probability. Coefficients approaching one show that the model flawlessly replicates the sample evolutionary pattern.
+7. **Kendall Tau Correlation:** Estimation through this coefficient has the advantage of offering an unbiased and highly efficient ordinal agreement measurement against high densities of repeated values or numerical ties. Its disadvantage manifests in higher computational iteration requirements and the usual generation of nominally lower magnitudes than those of Spearman. The interpretation is performed by observing the dominance of cross-sectional agreement probability. Coefficients approaching one show that the model flawlessly replicates the sample evolutionary pattern. **Parameterizable:** `corr_alternative` ('two-sided', 'less', 'greater').
 
-8. **TOST Equivalence Test:** Its systematic application provides the advantage of statistically and affirmatively demonstrating that two metric groups are indistinguishable within a precise instrumental boundary. The underlying disadvantage demands that the operator set tolerance limits a priori, a decision that lacks viability when there is no prior theoretical consensus. The interpretive framework requires rejecting the null hypothesis for both one-sided tests. A significant p-value empirically validates that the simulated series is operationally equivalent to the empirical one.
+8. **TOST Equivalence Test:** Its systematic application provides the advantage of statistically and affirmatively demonstrating that two metric groups are indistinguishable within a precise instrumental boundary. The underlying disadvantage demands that the operator set tolerance limits a priori, a decision that lacks viability when there is no prior theoretical consensus. The interpretive framework requires rejecting the null hypothesis for both one-sided tests. A significant p-value empirically validates that the simulated series is operationally equivalent to the empirical one. **Parameterizable:** `tost_bound_fraction` (fraction of the observed mean).
 
-9. **Bland-Altman Analysis:** The deployment of this technique offers the notable advantage of isolating systematic bias from random error, establishing exact empirical tolerance limits for future individual discrepancies. Its disadvantage requires assuming the normality of the observed residual differences between homologous methods. The evaluation is interpreted by examining the bias dispersion against its own variance. Biases close to the origin combined with tight agreement limits certify the technical interchangeability of the computational model.
+9. **Bland-Altman Analysis:** The deployment of this technique offers the notable advantage of isolating systematic bias from random error, establishing exact empirical tolerance limits for future individual discrepancies. Its disadvantage requires assuming the normality of the observed residual differences between homologous methods. The evaluation is interpreted by examining the bias dispersion against its own variance. Biases close to the origin combined with tight agreement limits certify the technical interchangeability of the computational model. **Parameterizable:** `bland_altman_alpha` (confidence level for limits of agreement).
 
 10. **Lin's Concordance Correlation Coefficient (CCC):** The structural strength of this metric rests on the parametric unification of mathematical accuracy and strict geometric fit relative to the ideal diagonal of equality. Its disadvantage is associated with the typical sensitivity of variance-based estimates when high-amplitude atypical instrumental noise is introduced. It is interpreted as a definitive verdict of instrumental and predictive congruence. Records exceeding conventional excellence bounds confirm a superlative degree of analytical validation.
 
@@ -30,32 +30,35 @@ Agreement analysis is essential to certify the validity of predictive models and
 
 ```python
 import numpy as np
-from concordance_analysis import evaluate_concordance
+from concordance_analysis_v2 import evaluate_concordance
 
-# Example 1: Significant Wave Height
+# Example 1: Basic usage with default parameters
 significant_wave_height_obs = np.array([1.2, 1.5, 1.3, 2.1, 1.8])
 significant_wave_height_swan = np.array([1.1, 1.6, 1.3, 2.0, 1.7])
-evaluate_concordance(significant_wave_height_obs, significant_wave_height_swan)
-```
+evaluate_concordance(significant_wave_height_obs, significant_wave_height_swan, "swan_default_report.txt")
 
-```python
-import numpy as np
-from concordance_analysis import evaluate_concordance
-
-# Example 2: Ocean Current Velocity
+# Example 2: Customizing bootstrap iterations and equivalence bounds
 current_velocity_obs = np.array([0.45, 0.52, 0.38, 0.61, 0.55])
 current_velocity_roms = np.array([0.48, 0.50, 0.40, 0.58, 0.57])
-evaluate_concordance(current_velocity_obs, current_velocity_roms, "roms_velocity_validation.txt")
-```
+evaluate_concordance(
+    current_velocity_obs, 
+    current_velocity_roms, 
+    file_name="roms_velocity_validation.txt",
+    n_boot=2000,
+    tost_bound_fraction=0.15
+)
 
-```python
-import numpy as np
-from concordance_analysis import evaluate_concordance
-
-# Example 3: Sea Surface Temperature
+# Example 3: Modifying hypothesis direction and confidence levels
 sea_surface_temp_obs = np.array([27.5, 27.8, 28.1, 27.9, 28.2])
 sea_surface_temp_croco = np.array([27.4, 27.7, 28.2, 28.0, 28.1])
-evaluate_concordance(sea_surface_temp_obs, sea_surface_temp_croco, "croco_sst_agreement.txt")
+evaluate_concordance(
+    sea_surface_temp_obs, 
+    sea_surface_temp_croco, 
+    file_name="croco_sst_agreement.txt",
+    mw_alternative='greater',
+    boot_alpha=0.01,
+    bland_altman_alpha=0.01
+)
 ```
 
 ## License
